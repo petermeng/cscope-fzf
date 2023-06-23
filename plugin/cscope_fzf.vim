@@ -50,6 +50,7 @@ function! CscopeFZF(type, full, query, ...)
 	let l:big_ref = ".cscope.big"
 	let l:small_cmd = ""
 	let l:big_cmd = ""
+        let l:exvim_ref = g:exvim_full_project_path.'/cscope.out'
 
 	if filereadable(l:big_ref)
 		if filereadable(l:small_ref)
@@ -57,7 +58,7 @@ function! CscopeFZF(type, full, query, ...)
 		endif
 		let l:big_cmd = "cscope -dL -f " . l:big_ref . " " . arg . " '" . a:query . "'; "
 	else
-		let l:native_cmd = "cscope -dL " . arg . " '" . a:query . "'; "
+		let l:native_cmd = "cscope -dL -f " . l:exvim_ref . " " . arg . " '" . a:query . "'; "
 	endif
 
 	" convert "<file> <func> <line number> <line>" into a colorized
